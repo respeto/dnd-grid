@@ -10,6 +10,7 @@
             :maxRowCount="maxRowCount"
             :margin="margin"
             :bubbleUp="bubbleUp"
+            :horizontalMovement="horizontalMovement"
         >
             <dnd-grid-box
                 boxId="settings"
@@ -39,6 +40,12 @@
                             <label for="settings-bubble-up-input" class="col-sm-4 col-form-label">Bubble Up</label>
                             <div class="col-sm-8">
                                 <input type="checkbox" v-model="bubbleUp" id="settings-bubble-up-input">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="settings-horizontal-movement-input" class="col-sm-4 col-form-label">Horizontal Movement</label>
+                            <div class="col-sm-8">
+                                <input type="checkbox" v-model="horizontalMovement" id="settings-horizontal-movement-input">
                             </div>
                         </div>
                         <button class="btn btn-success" @click="boxCount++">Add Box</button>
@@ -84,6 +91,7 @@
                     w: 100,
                     h: 100
                 },
+                horizontalMovement: false,
                 maxColumnCount: 10,
                 maxRowCount: Infinity,
                 bubbleUp: false,

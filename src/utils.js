@@ -47,14 +47,24 @@ export const bubbleUp = (layout, boxLayout) => {
 }
 
 // updates box position to a free place in a given layout
-export const moveBoxToFreePlace = (layout, boxLayout, doBubbleUp) => {
+export const moveBoxToFreePlace = (layout, boxLayout, doBubbleUp, horizontalMovement) => {
     if (doBubbleUp) {
         boxLayout = bubbleUp(layout, boxLayout)
     }
     while (!isFree(layout, boxLayout.position)) {
-        boxLayout = updateBoxPosition(boxLayout, {
-            y: boxLayout.position.y + 1
-        })
+        var direction = {}
+
+        if (horizontalMovement) {
+            direction = {
+                x: boxLayout.position.x + 1
+            }
+        } else {
+            direction = {
+                y: boxLayout.position.y + 1
+            }
+        }
+
+        boxLayout = updateBoxPosition(boxLayout, direction)
     }
     return boxLayout
 }
@@ -149,11 +159,11 @@ export const layoutHasCollisions = (layout) => {
 }
 
 // fix layout with collisions
-export const fixLayout = (layout, doBubbleUp) => {
+export const fixLayout = (layout, doBubbleUp, horizontalMovement) => {
     layout = sortLayout(layout)
     let fixedLayout = []
     layout.forEach(boxLayout => {
-        fixedLayout.push(moveBoxToFreePlace(fixedLayout, boxLayout, doBubbleUp))
+        fixedLayout.push(moveBoxToFreePlace(fixedLayout, boxLayout, doBubbleUp, horizontalMovement))
     })
     return fixedLayout
 }

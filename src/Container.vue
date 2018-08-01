@@ -53,6 +53,10 @@
                     }
                 }
             },
+            horizontalMovement: {
+                type: Boolean,
+                default: false
+            },
             maxColumnCount: {
                 type: Number,
                 default: Infinity
@@ -98,7 +102,7 @@
             layout (newLayout) {
                 if (this.fixLayoutOnLoad) {
                     if (utils.layoutHasCollisions(newLayout)) {
-                        this.updateLayout(utils.fixLayout(newLayout, this.bubbleUp))
+                        this.updateLayout(utils.fixLayout(newLayout, this.bubbleUp, this.horizontalMovement))
                     }
                 }
             }
@@ -506,7 +510,7 @@
                                 y: 0,
                                 ...this.defaultSize
                             }
-                        }, this.bubbleUp))
+                        }, this.bubbleUp, this.horizontalMovement))
                     })
                     this.updateLayout(newLayout)
                 }
